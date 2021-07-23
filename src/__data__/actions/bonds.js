@@ -20,7 +20,10 @@ export const fetchBonds = () => async (dispatch) => {
   try {
     const OFZ = await axios.get('https://iss.moex.com/iss/engines/stock/markets/bonds/boards/TQOB/securities.json');
     const CORP = await axios.get('https://iss.moex.com/iss/engines/stock/markets/bonds/boards/TQCB/securities.json');
-    const response = [...OFZ.data.securities.data, ...CORP.data.securities.data];
+    const response = {
+      data: [...OFZ.data.securities.data, ...CORP.data.securities.data],
+      marketData: [...OFZ.data.marketdata.data, ...CORP.data.marketdata.data],
+    };
     dispatch(bondsFetchSuccess(response));
   } catch (err) {
     dispatch(bondsFetchFails(err));

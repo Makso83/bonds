@@ -71,7 +71,7 @@ const BondsTable = () => {
                       <th>% год.</th>
                       <th>До погашения</th>
                       <th>Погашение</th>
-
+                      <th>Дюрация</th>
                   </tr>
                   </thead>
                   <tbody>

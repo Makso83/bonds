@@ -11,7 +11,8 @@ const filterBonds = (bond) => {
 };
 
 export default (bondsData) => {
-  const bonds = bondsData;
+  const bonds = bondsData.data;
+  const { marketData } = bondsData;
   return bonds
     .filter(filterBonds)
     .map((bond) => {
@@ -21,6 +22,7 @@ export default (bondsData) => {
       const percentProfit = profit / fullPrice;
       const daysTillEnd = daysTillRefund(bond);
       const yearProfit = (percentProfit * 365) / daysTillEnd;
+      const duration = marketData.find((data) => data[0] === bond[0])[36];
       return {
         key: bond[0],
         title: bond[2],
@@ -35,6 +37,7 @@ export default (bondsData) => {
         profit,
         yearProfit,
         daysTillEnd,
+        duration,
       };
     })
     .filter((bond) => bond.profit > 0 && bond.yearProfit < 1);

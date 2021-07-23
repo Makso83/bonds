@@ -6,6 +6,9 @@ import reducers from './reducers';
 
 const reduxReducers = combineReducers({ ...reducers });
 // eslint-disable-next-line
-const composeEnhancers = compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reduxReducers, composeEnhancers(
+  applyMiddleware(thunk),
+));
 
-export default createStore(reduxReducers, composeEnhancers);
+export default store;
